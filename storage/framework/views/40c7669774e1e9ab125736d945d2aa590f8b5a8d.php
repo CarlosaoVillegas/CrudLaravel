@@ -1,0 +1,1 @@
+aqui se crea<?php /**PATH C:\wamp64\www\crud\resources\views/cliente/create.blade.php ENDPATH**/ ?>
