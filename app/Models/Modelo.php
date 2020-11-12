@@ -33,10 +33,4 @@ class Modelo{
     }    
 
 
-
-
-
-
-
-
 }

@@ -3,6 +3,9 @@
 <?php $__env->startSection('content'); ?>
 
 
+
+
+
 <?php if(Session::has('Mensaje')): ?>
     <div class="alert alert-success" role="aler">
     <?php echo e(Session::get('Mensaje')); ?>

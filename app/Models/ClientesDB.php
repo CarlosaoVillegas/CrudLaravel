@@ -17,9 +17,9 @@ Class ClientesDB {
       
       public function consultaClientes(){
         $clientes = [];
-        $results = DB::select ('Select * from Clientes');
+        $results = DB::select ('Select * from clientes');
         foreach ($results as $registro){
-            $clientes[] = new Cliente($registro->RFC,$registro->Nombre,$registro->edad,$registro->idciudad);
+            $clientes[] = new Cliente($registro->rfc,$registro->nombre,$registro->edad,$registro->idciudad);
         }
         return $clientes;
       }
@@ -38,14 +38,15 @@ Class ClientesDB {
 
       public function modificaCliente($cliente,$RFC){
         $result = DB::update('update clientes set  nombre = ?, edad= ?, idciudad = ? where rfc = ?', 
-        [$cliente->getRFC(),$cliente->getNombre(),$cliente->getedad(),$cliente->getidciudad()]);
+        [$cliente->getNombre(),$cliente->getedad(),$cliente->getidciudad(),$RFC]);
 
       }
 
       public function consultaCliente($RFC){
        
-        $result = DB::select('select * from clientes where rfc = ?',[$RFC])[0];
-        $cliente = new Cliente($result->RFC,$result->Nombre,$result->edad,$result->iciudad);
+         $result = DB::select ('Select * from clientes where rfc = ?', [$RFC])[0];
+  
+        $cliente = new Cliente($result->rfc, $result->nombre ,$result->edad, $result->idciudad);
         return $cliente;
       }
 

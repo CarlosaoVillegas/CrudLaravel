@@ -14,7 +14,7 @@
     
 </div>
 <?php endif; ?>
-<form action="<?php echo e(url('/cliente/'.$cliente ?? '' ?? '' ?? ''->rfc)); ?>" method="post" enctype="multipart/form-data">
+<form action="<?php echo e(url('/cliente/'.$cliente->rfc)); ?>" method="post" enctype="multipart/form-data">
 <?php echo e(csrf_field()); ?>
 
 <?php echo e(method_field('PATCH')); ?>

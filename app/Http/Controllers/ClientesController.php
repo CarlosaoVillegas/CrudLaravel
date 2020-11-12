@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\DB;
 use App\Models\Cliente;
 use App\Models\clientes;
 use App\Models\Modelo;
 use Egulias\EmailValidator\Validation\Error\RFCWarnings;
 use Illuminate\Http\Request;
-
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Redirect;
 use stdClass;
 
@@ -31,15 +31,22 @@ class ClientesController extends Controller
         $rfc =$request->get('Search');
 
       
-      //  $datos['cliente']=clientes::where('rfc','like',"%$rfc%")->paginate(15);
+      $datos['cliente']=clientes::where('rfc','like',"%$rfc%")->paginate(5);
 
-    $datos= $this->modelo->consultaClientes();
+    //$datos= $this->modelo->consultaClientes();
         // $result = new stdClass();
         
-       return response()->json($datos);
-        //return view('cliente.index',$datos);
+       //return response()->json($datos);
+        return view('cliente.index',$datos);
+
+        
 
     }
+
+
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -86,15 +93,9 @@ class ClientesController extends Controller
      * @param  \App\Models\clientes  $clientes
      * @return \Illuminate\Http\Response
      */
-    public function show(clientes $clientes)
+    public function show()
     {
-        //
-
-         // $result = new stdClass();
-       $cliente=$this->modelo->consultaCliente('MALS785264L0O');
-        
-       //$cliente=clientes::findOrFail($id);
-       return response()->json($cliente);
+       
     }
 
     /**
@@ -106,13 +107,8 @@ class ClientesController extends Controller
     public function edit($rfc)
     {
      
-       // $result = new stdClass();
-       $cliente=$this->modelo->consultaCliente('MALS785264L0O');
-        
-        //$cliente=clientes::findOrFail($id);
-        return response()->json($cliente);
+        $cliente=clientes::where ('rfc',$rfc) ->firstOrFail();
         return view('cliente.edit',compact('cliente'));
-        
     }
 
     /**
@@ -135,7 +131,7 @@ class ClientesController extends Controller
         $mensaje = ["required"=>'El dato :attribute es requerido'];
         $this->validate($request,$campos,$mensaje);
 
-        $result = new stdClass();
+        
         $cliente = new Cliente ($request->rfc,$request->nombre,$request->edad,$request->idciudad);
         $this->modelo->modificaCliente($cliente,$rfc);
 

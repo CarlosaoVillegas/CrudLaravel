@@ -3,6 +3,9 @@
 @section('content')
 
 
+
+
+
 @if(Session::has('Mensaje'))
     <div class="alert alert-success" role="aler">
     {{Session::get('Mensaje')}}
@@ -40,7 +43,7 @@
     @foreach ($cliente as $clientet )
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{  $clientet->rfc   }}</td>
+                <td>{{  $clientet->rfc }}</td>
                 <td>{{  $clientet->nombre  }}</td>
                 <td>{{  $clientet->edad  }}</td> 
                 <td>{{  $clientet->idciudad }}</td>

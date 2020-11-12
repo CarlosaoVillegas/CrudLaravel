@@ -14,7 +14,7 @@
     
 </div>
 @endif
-<form action="{{ url('/cliente/'.$cliente ?? '' ?? '' ?? ''->rfc)}}" method="post" enctype="multipart/form-data">
+<form action="{{ url('/cliente/'.$cliente->rfc)}}" method="post" enctype="multipart/form-data">
 {{csrf_field()}}
 {{method_field('PATCH')}}
     @include('cliente.form',['modo'=>'editar'])
